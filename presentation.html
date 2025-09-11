@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>스마트 조명 제어 발표자료</title>
+  <style>
+    body { margin: 0; font-family: "Noto Sans KR", sans-serif; color: #000; background: #fdfdfd; }
+    .slide {
+      display: none;
+      width: 100vw; height: 100vh;
+      padding: 60px;
+      box-sizing: border-box;
+    }
+    .active { display: block; }
+
+    /* 제목 줄 */
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    h1 {
+      font-size: 2em;
+      margin: 0;
+      flex-grow: 1;
+    }
+    .title-row svg {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    /* 제목 밑줄 */
+    .divider {
+      height: 3px;
+      background: #444;
+      margin: 15px 0 25px 0;
+      width: 100%;
+    }
+
+    /* 내용 박스 */
+    .content-box {
+      background: #f0f4f8;
+      padding: 25px;
+      border-radius: 12px;
+      font-size: 1.1em;
+      line-height: 1.6em;
+      max-width: 90%;
+    }
+
+    ul { margin: 0; padding-left: 20px; }
+
+    /* 표 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 1.05em;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: center;
+    }
+    th { background-color: #e0e0e0; }
+
+    /* 순서도 */
+    .flowchart {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .flow-item {
+      text-align: center;
+      font-size: 0.9em;
+    }
+    .flow-item svg {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 슬라이드 1 -->
+  <div class="slide active">
+    <div class="title-row">
+      <h1>문제 정의</h1>
+      <!-- 전구 아이콘 -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <path d="M32 4a20 20 0 0 0-12 36v6a4 4 0 0 0 4 4h16a4 4 0 0 0 4-4v-6A20 20 0 0 0 32 4z" fill="#fdd835"/>
+        <rect x="24" y="50" width="16" height="8" rx="2" fill="#757575"/>
+      </svg>
+    </div>
+    <div class="divider"></div>
+    <div class="content-box">
+      <ul>
+        <li>과방 조명이 켜진 채 방치되어 전력 낭비 발생</li>
+        <li>학생들이 퇴실 후에도 불필요하게 불이 켜져 있음</li>
+        <li>전력 절약과 편리성을 동시에 충족할 해결책 필요</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 슬라이드 2 -->
+  <div class="slide">
+    <div class="title-row">
+      <h1>해결책 개요</h1>
+      <!-- 센서 아이콘 -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="12" fill="#4caf50"/>
+        <path d="M2 32h12M50 32h12M32 2v12M32 50v12" stroke="#333" stroke-width="4"/>
+      </svg>
+    </div>
+    <div class="divider"></div>
+    <div class="content-box">
+      <ul>
+        <li>센서를 통해 LED 조명을 자동 제어하는 시뮬레이션 모델 구현</li>
+        <li>PIR 센서: 사람 유무 감지</li>
+        <li>소리 센서: 손뼉·대화 소리로 제어</li>
+        <li>조도 센서: 낮에는 자동으로 소등</li>
+        <li>Python: 데이터 기록 및 전력 절감 효과 분석</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 슬라이드 3 -->
+  <div class="slide">
+    <div class="title-row">
+      <h1>기술 스택</h1>
+      <!-- 코드 아이콘 -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <rect x="12" y="12" width="40" height="40" fill="#2196f3"/>
+      </svg>
+    </div>
+    <div class="divider"></div>
+    <div class="content-box">
+      <h2>구성 요소</h2>
+      <ul>
+        <li><b>하드웨어</b>: Arduino Uno, PIR 센서, 소리 센서, 조도 센서, 릴레이, LED</li>
+        <li><b>소프트웨어</b>: Arduino IDE(C 코드), Python + Streamlit</li>
+        <li><b>연동</b>: 아두이노에서 센서 데이터 수집 → 시리얼 통신으로 전송</li>
+        <li><b>시각화</b>: Python에서 데이터 분석, Streamlit으로 웹 대시보드 출력</li>
+      </ul>
+
+      <h2>흐름 구조</h2>
+      <div class="flowchart">
+        <div class="flow-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+            <rect x="10" y="10" width="44" height="44" rx="6" fill="#2196f3"/>
+          </svg>
+          Arduino
+        </div>
+        ➝
+        <div class="flow-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="20" fill="#4caf50"/>
+          </svg>
+          센서 입력<br>(PIR/소리/조도)
+        </div>
+        ➝
+        <div class="flow-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+            <rect x="12" y="20" width="40" height="24" fill="#ff9800"/>
+          </svg>
+          데이터 전송<br>(Serial)
+        </div>
+        ➝
+        <div class="flow-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+            <rect x="8" y="12" width="48" height="40" fill="#9c27b0"/>
+          </svg>
+          Python<br>분석/적산
+        </div>
+        ➝
+        <div class="flow-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+            <path d="M8 56L56 56L32 8z" fill="#ff5722"/>
+          </svg>
+          Streamlit<br>대시보드
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 슬라이드 4 -->
+  <div class="slide">
+    <div class="title-row">
+      <h1>주차별 마일스톤</h1>
+      <!-- 달력 아이콘 -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <rect x="8" y="12" width="48" height="44" rx="4" fill="#ff7043"/>
+        <line x1="8" y1="24" x2="56" y2="24" stroke="#fff" stroke-width="4"/>
+      </svg>
+    </div>
+    <div class="divider"></div>
+    <div class="content-box">
+      <table>
+        <tr><th>주차</th><th>목표</th></tr>
+        <tr><td>1주차</td><td>센서 입력 테스트 & LED 제어</td></tr>
+        <tr><td>2주차</td><td>조건부 제어 로직 (사람 유무 + 조도)</td></tr>
+        <tr><td>3주차</td><td>소리 이벤트 제어 추가</td></tr>
+        <tr><td>4주차</td><td>Python 로그 기록 & 절약 전력량 분석</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 슬라이드 5 -->
+  <div class="slide">
+    <div class="title-row">
+      <h1>기대 효과</h1>
+      <!-- 별 아이콘 -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <polygon points="32,4 39,24 60,24 42,38 49,58 32,46 15,58 22,38 4,24 25,24"
+         fill="#ffeb3b" stroke="#333" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="divider"></div>
+    <div class="content-box">
+      <ul>
+        <li>과방 전력 낭비 방지 → 전기요금 절감</li>
+        <li>IoT 기반 스마트 제어 경험 확보</li>
+        <li>실험실/캠퍼스 전체 확장 가능성</li>
+        <li>에너지 절약과 자동화 기술 융합 효과</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    let current = 0;
+    const slides = document.querySelectorAll(".slide");
+
+    function showSlide(index) {
+      slides.forEach((s, i) => s.classList.toggle("active", i === index));
+    }
+    function prevSlide() {
+      current = (current - 1 + slides.length) % slides.length;
+      showSlide(current);
+    }
+    function nextSlide() {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") nextSlide();
+      if (e.key === "ArrowLeft") prevSlide();
+    });
+  </script>
+
+</body>
+</html>
+
